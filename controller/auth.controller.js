@@ -32,8 +32,6 @@ const registerUser = async (req, res) => {
 
 // register User
 const loginUser = async (req, res) => {
-  console.log("Headers:", req.headers);
-  console.log("Body:", req.body);
   const { email, password } = req.body;
   if (!email || !password)
     return res.json({ message: "Please provide all vaild filed" });
@@ -45,7 +43,7 @@ const loginUser = async (req, res) => {
   if (!ispassswordCorrect) {
     return res.json({ message: "Invaild credentials" }).status(401);
   }
-  const token = await jwt.sign({ id: userModel._id }, process.env.JWT_SECRET, {
+  const token = await jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
     expiresIn: "1h",
   });
 
@@ -67,4 +65,5 @@ const logout = async (req, res) => {
     message: "User Successfully log out",
   });
 };
+
 module.exports = { registerUser, loginUser, logout };
