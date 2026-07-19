@@ -10,8 +10,17 @@ app.use(express.json());
 app.use(express.json({ extended: true }));
 app.use(cookieParser());
 //route
-const authrouter = require("./router/auth.router");
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+//routers
+
+const authrouter = require("./router/auth.router");
+const communityrouter = require("./router/community.router");
+const membershiprouter = require("./router/membership.router");
+//router
+app.use("/api/community/v1", communityrouter);
+app.use("/api/membership/v1", membershiprouter);
 app.use("/api/v1", authrouter);
 
 app.listen(process.env.PORT, async () => {

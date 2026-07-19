@@ -13,7 +13,7 @@ router.post("/user/login", authcontroller.loginUser);
 router.post("/user/logout", authcontroller.logout);
 
 //User Router
-// first route should be get the infromation of the user
+// first route should be get the infromation of the loged in user
 router.get(
   "/user/logedin",
   authmiddleware.isAuthenticated,
